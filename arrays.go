@@ -104,3 +104,16 @@ func Except(a, b []int) []int {
 	}
 	return a[:k]
 }
+
+func IsEqual(a, b []int) bool {
+	size := len(a)
+	if size != len(b) {
+		return false
+	}
+	for i := 0; i < size; i++ {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
