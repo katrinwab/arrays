@@ -1,13 +1,8 @@
 package arrays
 
-func Intersect(a, b []int) []int {
+func IntersectEx(a, b, c []int) []int {
 	asize := len(a)
 	bsize := len(b)
-	csize := asize
-	if csize > bsize {
-		csize = bsize
-	}
-	c := make([]int, 0, csize)
 	i := 0
 	j := 0
 	for i < asize && j < bsize {
@@ -26,10 +21,18 @@ func Intersect(a, b []int) []int {
 	return c
 }
 
-func Union(a, b []int) []int {
+func Intersect(a, b []int) []int {
+	size := len(a)
+	if size > len(b) {
+		size = len(b)
+	}
+	c := make([]int, 0, size)
+	return IntersectEx(a, b, c)
+}
+
+func UnionEx(a, b, c []int) []int {
 	asize := len(a)
 	bsize := len(b)
-	c := make([]int, 0, (asize + bsize))
 	i := 0
 	j := 0
 	for i < asize && j < bsize {
@@ -57,6 +60,12 @@ func Union(a, b []int) []int {
 		j++
 	}
 	return c
+}
+
+func Union(a, b []int) []int {
+	size := len(a) + len(b)
+	c := make([]int, 0, size)
+	return UnionEx(a, b, c)
 }
 
 func Distinct(a []int) []int {
@@ -118,7 +127,7 @@ func IsEqual(a, b []int) bool {
 	return true
 }
 
-func Combine(a [][]int, f func(a, b []int) []int) []int {
+func Combine(a [][]int, f func([]int, []int) []int) []int {
 	size := len(a)
 	if size == 0 {
 		a = [][]int{[]int{}, []int{}}
