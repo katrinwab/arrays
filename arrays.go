@@ -1,8 +1,11 @@
 package arrays
 
-func IntersectEx(a, b, c []int) []int {
+func IntersectEx2(r, a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
+	if asize > bsize {
+		asize, bsize, a, b = bsize, asize, b, a
+	}
 	i := 0
 	j := 0
 	for i < asize && j < bsize {
@@ -14,11 +17,11 @@ func IntersectEx(a, b, c []int) []int {
 			j++
 			continue
 		}
-		c = append(c, a[i])
+		r = append(r, a[i])
 		i++
 		j++
 	}
-	return c
+	return r
 }
 
 func Intersect(a, b []int) []int {
@@ -26,46 +29,46 @@ func Intersect(a, b []int) []int {
 	if size > len(b) {
 		size = len(b)
 	}
-	c := make([]int, 0, size)
-	return IntersectEx(a, b, c)
+	r := make([]int, 0, size)
+	return IntersectEx2(r, a, b)
 }
 
-func UnionEx(a, b, c []int) []int {
+func UnionEx2(r, a, b[]int) []int {
 	asize := len(a)
 	bsize := len(b)
 	i := 0
 	j := 0
 	for i < asize && j < bsize {
 		if a[i] < b[j] {
-			c = append(c, a[i])
+			r = append(r, a[i])
 			i++
 			continue
 		}
 		if a[i] > b[j] {
-			c = append(c, b[j])
+			r = append(r, b[j])
 			j++
 			continue
 		}
-		c = append(c, a[i])
-		c = append(c, b[j])
+		r = append(r, a[i])
+		r = append(r, b[j])
 		i++
 		j++
 	}
 	for i < asize {
-		c = append(c, a[i])
+		r = append(r, a[i])
 		i++
 	}
 	for j < bsize {
-		c = append(c, b[j])
+		r = append(r, b[j])
 		j++
 	}
-	return c
+	return r
 }
 
 func Union(a, b []int) []int {
 	size := len(a) + len(b)
-	c := make([]int, 0, size)
-	return UnionEx(a, b, c)
+	r := make([]int, 0, size)
+	return UnionEx2(r, a, b)
 }
 
 func Distinct(a []int) []int {
