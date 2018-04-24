@@ -1,11 +1,8 @@
 package arrays
 
-func IntersectEx2(r, a, b []int) []int {
+func IntersectEx(r, a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
-	if asize > bsize {
-		asize, bsize, a, b = bsize, asize, b, a
-	}
 	i := 0
 	j := 0
 	for i < asize && j < bsize {
@@ -30,10 +27,10 @@ func Intersect(a, b []int) []int {
 		size = len(b)
 	}
 	r := make([]int, 0, size)
-	return IntersectEx2(r, a, b)
+	return IntersectEx(r, a, b)
 }
 
-func UnionEx2(r, a, b[]int) []int {
+func UnionEx(r, a, b[]int) []int {
 	asize := len(a)
 	bsize := len(b)
 	i := 0
@@ -68,7 +65,7 @@ func UnionEx2(r, a, b[]int) []int {
 func Union(a, b []int) []int {
 	size := len(a) + len(b)
 	r := make([]int, 0, size)
-	return UnionEx2(r, a, b)
+	return UnionEx(r, a, b)
 }
 
 func Distinct(a []int) []int {
