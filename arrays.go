@@ -1,5 +1,18 @@
 package arrays
 
+func IsEqual(a, b []int) bool {
+	size := len(a)
+	if size != len(b) {
+		return false
+	}
+	for i := 0; i < size; i++ {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}
+
 func IntersectEx(r, a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
@@ -30,7 +43,7 @@ func Intersect(a, b []int) []int {
 	return IntersectEx(r, a, b)
 }
 
-func UnionEx(r, a, b[]int) []int {
+func UnionEx(r, a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
 	i := 0
@@ -94,50 +107,22 @@ func Except(a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
 	for i < asize {
-		valid := true
+		unique := true
 		for j < bsize {
 			if b[j] < a[i] {
 				j++
 				continue
 			}
 			if b[j] == a[i] {
-				valid = false
+				unique = false
 			}
 			break
 		}
 		a[k] = a[i]
-		if valid {
+		if unique {
 			k++
 		}
 		i++
 	}
 	return a[:k]
-}
-
-func IsEqual(a, b []int) bool {
-	size := len(a)
-	if size != len(b) {
-		return false
-	}
-	for i := 0; i < size; i++ {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-	return true
-}
-
-func Combine(a [][]int, f func([]int, []int) []int) []int {
-	size := len(a)
-	if size == 0 {
-		a = [][]int{[]int{}, []int{}}
-	}
-	if size == 1 {
-		a = append(a, []int{})
-	}
-	c := f(a[0], a[1])
-	for i := 2; i < size; i++ {
-		c = f(c, a[i])
-	}
-	return c
 }
