@@ -107,19 +107,19 @@ func Except(a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
 	for i < asize {
-		unique := true
+		uniq := true
 		for j < bsize {
 			if b[j] < a[i] {
 				j++
 				continue
 			}
 			if b[j] == a[i] {
-				unique = false
+				uniq = false
 			}
 			break
 		}
 		a[k] = a[i]
-		if unique {
+		if uniq {
 			k++
 		}
 		i++

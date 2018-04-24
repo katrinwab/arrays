@@ -14,6 +14,9 @@ func TestIsEqual(t *testing.T) {
 	if IsEqual([]int{}, []int{1}) {
 		t.Fail()
 	}
+	if IsEqual([]int{1}, []int{2}) {
+		t.Fail()
+	}
 }
 
 func TestIntersect(t *testing.T) {
@@ -29,6 +32,9 @@ func TestIntersect(t *testing.T) {
 	if !IsEqual(Intersect([]int{1, 2}, []int{2, 3}), []int{2}) {
 		t.Fail()
 	}
+	if !IsEqual(Intersect([]int{2, 5}, []int{1, 2}), []int{2}) {
+		t.Fail()
+	}
 }
 
 func TestUnion(t *testing.T) {
@@ -39,6 +45,12 @@ func TestUnion(t *testing.T) {
 		t.Fail()
 	}
 	if !IsEqual(Union([]int{2}, []int{1}), []int{1, 2}) {
+		t.Fail()
+	}
+	if !IsEqual(Union([]int{1, 3, 5}, []int{2, 4, 6}), []int{1, 2, 3, 4, 5, 6}) {
+		t.Fail()
+	}
+	if !IsEqual(Union([]int{1, 2, 3}, []int{2, 3, 4}), []int{1, 2, 2, 3, 3, 4}) {
 		t.Fail()
 	}
 }
