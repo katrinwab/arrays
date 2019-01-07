@@ -43,7 +43,7 @@ func Intersect(a, b []int) []int {
 	return IntersectEx(r, a, b)
 }
 
-func UnionEx(r, a, b []int) []int {
+func unionEx(r, a, b []int, all bool) []int {
 	asize := len(a)
 	bsize := len(b)
 	i := 0
@@ -59,8 +59,11 @@ func UnionEx(r, a, b []int) []int {
 			j++
 			continue
 		}
-		r = append(r, a[i])
-		r = append(r, b[j])
+		if all {
+			r = append(r, a[i], b[j])
+		} else {
+			r = append(r, a[i])
+		}
 		i++
 		j++
 	}
@@ -73,6 +76,21 @@ func UnionEx(r, a, b []int) []int {
 		j++
 	}
 	return r
+
+}
+
+func UnionAllEx(r, a, b []int) []int {
+	return unionEx(r, a, b, true)
+}
+
+func UnionAll(a, b []int) []int {
+	size := len(a) + len(b)
+	r := make([]int, 0, size)
+	return UnionAllEx(r, a, b)
+}
+
+func UnionEx(r, a, b []int) []int {
+	return unionEx(r, a, b, false)
 }
 
 func Union(a, b []int) []int {

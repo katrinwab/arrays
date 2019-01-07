@@ -37,6 +37,24 @@ func TestIntersect(t *testing.T) {
 	}
 }
 
+func TestUnionAll(t *testing.T) {
+	if !IsEqual(UnionAll([]int{}, []int{}), []int{}) {
+		t.Fail()
+	}
+	if !IsEqual(UnionAll([]int{1}, []int{}), []int{1}) {
+		t.Fail()
+	}
+	if !IsEqual(UnionAll([]int{2}, []int{1}), []int{1, 2}) {
+		t.Fail()
+	}
+	if !IsEqual(UnionAll([]int{1, 3, 5}, []int{2, 4, 6}), []int{1, 2, 3, 4, 5, 6}) {
+		t.Fail()
+	}
+	if !IsEqual(UnionAll([]int{1, 2, 3}, []int{2, 3, 4}), []int{1, 2, 2, 3, 3, 4}) {
+		t.Fail()
+	}
+}
+
 func TestUnion(t *testing.T) {
 	if !IsEqual(Union([]int{}, []int{}), []int{}) {
 		t.Fail()
@@ -50,7 +68,7 @@ func TestUnion(t *testing.T) {
 	if !IsEqual(Union([]int{1, 3, 5}, []int{2, 4, 6}), []int{1, 2, 3, 4, 5, 6}) {
 		t.Fail()
 	}
-	if !IsEqual(Union([]int{1, 2, 3}, []int{2, 3, 4}), []int{1, 2, 2, 3, 3, 4}) {
+	if !IsEqual(Union([]int{1, 2, 3}, []int{2, 3, 4}), []int{1, 2, 3, 4}) {
 		t.Fail()
 	}
 }
