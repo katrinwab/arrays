@@ -118,7 +118,38 @@ func Distinct(a []int) []int {
 	return a[:j]
 }
 
+func ExceptEx(r, a, b []int) []int {
+	i := 0
+	j := 0
+	asize := len(a)
+	bsize := len(b)
+	for i < asize {
+		uniq := true
+		for j < bsize {
+			if b[j] < a[i] {
+				j++
+				continue
+			}
+			if b[j] == a[i] {
+				uniq = false
+			}
+			break
+		}
+		if uniq {
+			r = append(r, a[i])
+		}
+		i++
+	}
+	return r
+}
+
 func Except(a, b []int) []int {
+	size := len(a)
+	r := make([]int, 0, size)
+	return ExceptEx(r, a, b)
+}
+
+func ExceptInpl(a, b []int) []int {
 	i := 0
 	j := 0
 	k := 0
