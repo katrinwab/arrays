@@ -43,7 +43,7 @@ func Intersect(a, b []int) []int {
 	return IntersectEx(r, a, b)
 }
 
-func unionEx(r, a, b []int, all bool) []int {
+func UnionAllEx(r, a, b []int) []int {
 	asize := len(a)
 	bsize := len(b)
 	i := 0
@@ -59,11 +59,7 @@ func unionEx(r, a, b []int, all bool) []int {
 			j++
 			continue
 		}
-		if all {
-			r = append(r, a[i], b[j])
-		} else {
-			r = append(r, a[i])
-		}
+		r = append(r, a[i], b[j])
 		i++
 		j++
 	}
@@ -76,11 +72,6 @@ func unionEx(r, a, b []int, all bool) []int {
 		j++
 	}
 	return r
-
-}
-
-func UnionAllEx(r, a, b []int) []int {
-	return unionEx(r, a, b, true)
 }
 
 func UnionAll(a, b []int) []int {
@@ -90,7 +81,51 @@ func UnionAll(a, b []int) []int {
 }
 
 func UnionEx(r, a, b []int) []int {
-	return unionEx(r, a, b, false)
+	asize := len(a)
+	bsize := len(b)
+	i := 0
+	j := 0
+	for i < asize && j < bsize {
+		v := a[i]
+		if v > b[j] {
+			v = b[j]
+		}
+		for i < asize {
+			if a[i] > v {
+				break
+			}
+			i++
+		}
+		for j < bsize {
+			if b[j] > v {
+				break
+			}
+			j++
+		}
+		r = append(r, v)
+	}
+	for i < asize {
+		v := a[i]
+		for i < asize {
+			if a[i] > v {
+				break
+			}
+			i++
+		}
+		r = append(r, v)
+	}
+	for j < bsize {
+		v := b[j]
+		for j < bsize {
+			if b[j] > v {
+				break
+			}
+			j++
+		}
+		r = append(r, v)
+	}
+	return r
+
 }
 
 func Union(a, b []int) []int {

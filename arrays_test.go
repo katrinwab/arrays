@@ -65,6 +65,9 @@ func TestUnion(t *testing.T) {
 	if !IsEqual(Union([]int{2}, []int{1}), []int{1, 2}) {
 		t.Fail()
 	}
+	if !IsEqual(Union([]int{2}, []int{1, 1}), []int{1, 2}) {
+		t.Fail()
+	}
 	if !IsEqual(Union([]int{1, 3, 5}, []int{2, 4, 6}), []int{1, 2, 3, 4, 5, 6}) {
 		t.Fail()
 	}
