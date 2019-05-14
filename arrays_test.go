@@ -105,3 +105,21 @@ func TestExcept(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestReverse(t *testing.T) {
+	if !IsEqual(Reverse([]int{}), []int{}) {
+		t.Fail()
+	}
+
+	if !IsEqual(Reverse([]int{1}), []int{1}) {
+		t.Fail()
+	}
+
+	if !IsEqual(Reverse([]int{1, 2}), []int{2, 1}) {
+		t.Fail()
+	}
+
+	if !IsEqual(Reverse([]int{1, 2, 3}), []int{3, 2, 1}) {
+		t.Fail()
+	}
+}

@@ -210,3 +210,12 @@ func ExceptInpl(a, b []int) []int {
 	}
 	return a[:k]
 }
+
+func Reverse(a []int) []int {
+	size := len(a)
+
+	for left, right := 0, size-1; left < right; left, right = left+1, right-1 {
+		a[left], a[right] = a[right], a[left]
+	}
+	return a
+}
